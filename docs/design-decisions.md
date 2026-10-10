@@ -28,6 +28,10 @@ before mutation. `reopen_ticket` is the only operation that moves a resolved
 ticket back to open. `unresolved_queue` returns a sorted list without modifying
 the input collection.
 
+The report tests also verify consistency: the sum of all status counts and
+the sum of all priority counts must each equal the total ticket count.
+This helps detect discrepancies in report aggregation.
+
 `load_tickets(path)` returns a validated list, or an empty list when the file is
 absent. `save_tickets(tickets, path)` validates before writing. Both surface
 clear `StorageError` messages for invalid data or I/O failures. The CLI catches
@@ -58,8 +62,15 @@ The intended assignment split is Engineer A: ticket creation, validation,
 priority, and their tests; Engineer B: assignment, workflow, queue, reports,
 and their tests. Both fellows must agree on the dictionary and error contracts
 above, integrate storage/CLI work, and make separate feature branches and PRs.
-This local workspace currently has one available contributor; no second
-fellow's authorship, branch, review, approval, or integration is claimed.
+
+
+Both fellows should document their actual contributions and collaboration
+using their own Git history and pull requests. Engineer A's additional
+report-consistency test is recorded in the
+`feat/johnson-report-improvement` branch. The test verifies that status
+counts and priority counts each sum to the total number of tickets.
+The branch was pushed to GitHub for review. Review and merge status must
+be confirmed from the pull request before submission.
 
 Before submitting, the actual fellows should:
 
@@ -86,3 +97,24 @@ git switch -c feat/2-workflow-reports
 Use focused commits such as `feat: enforce ticket status transitions` and
 `test: cover unresolved queue ordering`. Do not put runtime ticket data,
 credentials, or generated Python files in a PR.
+
+
+### Report consistency test
+
+- Concept/topic: Unit testing and report consistency.
+- Problem investigated: How to verify that ticket report counts are consistent.
+- Initial understanding: The existing tests checked expected counts for empty
+  and populated ticket collections.
+- Actual AI prompt: [Record the actual question you asked about this task.]
+- Guidance received: Add a test that checks whether the sum of status counts
+  and the sum of priority counts each equal the total number of tickets.
+- Independent experiment or test: Ran
+  `python -m unittest discover -s tests -v`.
+- Actual result/source: All 27 tests passed, including
+  `test_report_counts_add_up_to_total`.
+- Decision and explanation: Added the consistency test to
+  `tests/test_reports.py` and committed the change.
+- Related file, test, commit, or PR: `tests/test_reports.py`;
+  commit `b9b0710`; branch `feat/johnson-report-improvement`.
+- What I can explain independently now: How assertions can verify that
+  grouped report counts agree with the overall ticket total.

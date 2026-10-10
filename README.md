@@ -24,14 +24,11 @@ contributions must be entered by the actual fellows; none are inferred here.
 
 | Fellow | Name | Verified contribution |
 | --- | --- | --- |
-| Engineer A | [Enter Fellow A's name] | [Complete from actual authored work and review] |
-| Engineer B | [Enter Fellow B's name] | [Complete from actual authored work and review] |
+| Engineer A | [Johnson elaigwu peter] | [Ticket creation, input validation, automatic priority calculation, ticket ID generation, and related tests. ] |
+| Engineer B | [victoria abah] | [Ticket assignment, status transitions, unresolved ticket queue, report generation, and related tests.] |
 
-The implementation in this workspace is on local branch
-`feat/1-ticket-creation`. No fellow-authored commits, pull requests, partner
-reviews, or approvals are claimed by this README. The second fellow should use
-the contribution workflow in [docs/design-decisions.md](docs/design-decisions.md)
-and complete their own learning log.
+
+
 
 ## Requirements
 
