@@ -38,6 +38,23 @@ class ReportTests(unittest.TestCase):
             },
         )
 
+    def test_report_counts_add_up_to_total(self):
+        tickets = [
+            create_ticket([], "Network outage", "Network", "high", 12),
+            create_ticket([], "Slow login", "Software", "medium", 1),
+            create_ticket([], "Printer setup", "Hardware", "low", 1),
+        ]
+
+        report = build_report(tickets)
+
+        self.assertEqual(
+            sum(report["by_status"].values()),
+            report["total"],
+        )
+        self.assertEqual(
+            sum(report["by_priority"].values()),
+            report["total"],
+        )
 
 if __name__ == "__main__":
     unittest.main()
